@@ -1,34 +1,58 @@
 {
   "project_info": {
-    "project_number": "760348033671",
-    "firebase_url": "https://tmessages2.firebaseio.com",
-    "project_id": "tmessages2",
-    "storage_bucket": "tmessages2.appspot.com"
+    "project_number": "992108021214",
+    "firebase_url": "https://mockapp-c8241.firebaseio.com",
+    "project_id": "mockapp-c8241",
+    "storage_bucket": "mockapp-c8241.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:760348033671:android:f6afd7b67eae3860",
+        "mobilesdk_app_id": "1:992108021214:android:edd015e4f6287f2be4c94f",
         "android_client_info": {
-          "package_name": "org.telegram.messenger"
+          "package_name": "com.crane.mockapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "760348033671-2hh8ebmuflsnjoc0kldkfells9rhtfni.apps.googleusercontent.com",
+          "client_id": "992108021214-c6qi6b6qhg9dtccarcg6s36k8b4e3gq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crane.mockapp",
+            "certificate_hash": "585624d61d4d72d587ce446720f06807a203d89b"
+          }
+        },
+        {
+          "client_id": "992108021214-r17j48s7sbhn9ikllce0fhbup2k2a9o1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crane.mockapp",
+            "certificate_hash": "076d2f95c152a5cb7d5bb6ad52d457dcdc07b81f"
+          }
+        },
+        {
+          "client_id": "992108021214-s6cbf6ffofjrut8dfavh8ok8khrb2vaq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crane.mockapp",
+            "certificate_hash": "e2683fa4073b4b88b06d6f5dddd59ce98d6e42a0"
+          }
+        },
+        {
+          "client_id": "992108021214-7sjn2emjhp449rhie5fpn5e4hkki2li9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-t0jLPjUt2FxrA8VPK2EiYHcYcboIR6k"
+          "current_key": "AIzaSyApuVGYg_8OFhKKrdKHRU-9FJXWSN0EHjA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "760348033671-2hh8ebmuflsnjoc0kldkfells9rhtfni.apps.googleusercontent.com",
+              "client_id": "992108021214-7sjn2emjhp449rhie5fpn5e4hkki2li9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -37,27 +61,35 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:760348033671:android:dc022572c167a16c",
+        "mobilesdk_app_id": "1:992108021214:android:81915993db952f08e4c94f",
         "android_client_info": {
-          "package_name": "org.telegram.messenger.beta"
+          "package_name": "com.crane.telegram.messenger"
         }
       },
       "oauth_client": [
         {
-          "client_id": "760348033671-2hh8ebmuflsnjoc0kldkfells9rhtfni.apps.googleusercontent.com",
+          "client_id": "992108021214-ulc2qh6h95jqslepplcjo0kqugmmb9j0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crane.telegram.messenger",
+            "certificate_hash": "e2683fa4073b4b88b06d6f5dddd59ce98d6e42a0"
+          }
+        },
+        {
+          "client_id": "992108021214-7sjn2emjhp449rhie5fpn5e4hkki2li9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-t0jLPjUt2FxrA8VPK2EiYHcYcboIR6k"
+          "current_key": "AIzaSyApuVGYg_8OFhKKrdKHRU-9FJXWSN0EHjA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "760348033671-2hh8ebmuflsnjoc0kldkfells9rhtfni.apps.googleusercontent.com",
+              "client_id": "992108021214-7sjn2emjhp449rhie5fpn5e4hkki2li9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -66,27 +98,35 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:760348033671:android:7396e651423888c3f66e22",
+        "mobilesdk_app_id": "1:992108021214:android:329ea2d738f1e047e4c94f",
         "android_client_info": {
-          "package_name": "org.telegram.messenger.web"
+          "package_name": "com.crane.telegram.messenger.beta"
         }
       },
       "oauth_client": [
         {
-          "client_id": "760348033671-2hh8ebmuflsnjoc0kldkfells9rhtfni.apps.googleusercontent.com",
+          "client_id": "992108021214-efmev2vnsbop8fgaka5hivgcaupkro6v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crane.telegram.messenger.beta",
+            "certificate_hash": "e2683fa4073b4b88b06d6f5dddd59ce98d6e42a0"
+          }
+        },
+        {
+          "client_id": "992108021214-7sjn2emjhp449rhie5fpn5e4hkki2li9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA-t0jLPjUt2FxrA8VPK2EiYHcYcboIR6k"
+          "current_key": "AIzaSyApuVGYg_8OFhKKrdKHRU-9FJXWSN0EHjA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "760348033671-2hh8ebmuflsnjoc0kldkfells9rhtfni.apps.googleusercontent.com",
+              "client_id": "992108021214-7sjn2emjhp449rhie5fpn5e4hkki2li9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

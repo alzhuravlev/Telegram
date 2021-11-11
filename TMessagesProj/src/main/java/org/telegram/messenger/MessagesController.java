@@ -9092,7 +9092,7 @@ public class MessagesController extends BaseController implements NotificationCe
         });
     }
 
-    public void toogleNoForwards(long chatId, boolean noForwards) {
+    public void toggleNoForwards(long chatId, boolean noForwards) {
         TLRPC.TL_messages_toggleNoForwards req = new TLRPC.TL_messages_toggleNoForwards();
         req.peer = getInputPeer(-chatId);
         req.enabled = noForwards;

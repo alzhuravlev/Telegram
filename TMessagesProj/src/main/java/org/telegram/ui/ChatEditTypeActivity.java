@@ -42,7 +42,6 @@ import org.telegram.ui.Cells.HeaderCell;
 import org.telegram.ui.Cells.LoadingCell;
 import org.telegram.ui.Cells.RadioButtonCell;
 import org.telegram.ui.Cells.ShadowSectionCell;
-import org.telegram.ui.Cells.TextCell;
 import org.telegram.ui.Cells.TextCheckCell;
 import org.telegram.ui.Cells.TextInfoPrivacyCell;
 import org.telegram.ui.Cells.TextSettingsCell;
@@ -479,7 +478,7 @@ public class ChatEditTypeActivity extends BaseFragment implements NotificationCe
         }
         if (isPrivate && currentChat.noforwards != noForwards) {
             currentChat.noforwards = noForwards;
-            getMessagesController().toogleNoForwards(currentChat.id, noForwards);
+            getMessagesController().toggleNoForwards(currentChat.id, noForwards);
         }
         return true;
     }

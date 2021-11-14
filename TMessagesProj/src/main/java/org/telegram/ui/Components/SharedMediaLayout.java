@@ -49,6 +49,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
@@ -1431,7 +1432,15 @@ public class SharedMediaLayout extends FrameLayout implements NotificationCenter
             forwardItem.setDuplicateParentStateEnabled(false);
             actionModeLayout.addView(forwardItem, new LinearLayout.LayoutParams(AndroidUtilities.dp(54), ViewGroup.LayoutParams.MATCH_PARENT));
             actionModeViews.add(forwardItem);
-            forwardItem.setOnClickListener(v -> onActionBarItemClick(forward));
+            noForwardsChanged();
+            forwardItem.setOnClickListener(v -> {
+                TLRPC.Chat chat = delegate == null ? null : delegate.getCurrentChat();
+                if (chat != null && chat.noforwards) {
+                    showNoForwardsHint(forwardItem, ChatObject.isChannel(chat));
+                } else {
+                    onActionBarItemClick(forward);
+                }
+            });
         }
         deleteItem = new ActionBarMenuItem(context, null, Theme.getColor(Theme.key_actionBarActionModeDefaultSelector), Theme.getColor(Theme.key_windowBackgroundWhiteGrayText2), false);
         deleteItem.setIcon(R.drawable.msg_delete);
@@ -5366,6 +5375,18 @@ public class SharedMediaLayout extends FrameLayout implements NotificationCenter
                 }
             }
         }
+    }
+
+    public void showNoForwardsHint(View anchor, boolean isChannel) {
+    }
+
+    @CallSuper
+    public void hideHints() {
+    }
+
+    public void noForwardsChanged() {
+        TLRPC.Chat chat = delegate == null ? null : delegate.getCurrentChat();
+        forwardItem.setAlpha(chat != null && chat.noforwards ? 0.5f : 1.0f);
     }
 
     public class MediaSearchAdapter extends RecyclerListView.SelectionAdapter {

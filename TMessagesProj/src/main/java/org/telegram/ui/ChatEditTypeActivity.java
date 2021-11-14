@@ -74,12 +74,15 @@ public class ChatEditTypeActivity extends BaseFragment implements NotificationCe
     private LinearLayout publicContainer;
     private LinearLayout privateContainer;
     private LinkActionView permanentLinkView;
-    private TextCheckCell savingContentCell;
-    private TextInfoPrivacyCell savingContentInfoCell;
     private ShadowSectionCell sectionCell2;
     private TextInfoPrivacyCell infoCell;
     private TextSettingsCell textCell;
     private TextSettingsCell textCell2;
+
+    private LinearLayout linearLayoutSavingContentContainer;
+    private HeaderCell headerCellSavingContent;
+    private TextCheckCell savingContentCell;
+    private TextInfoPrivacyCell savingContentInfoCell;
 
     private boolean isPrivate;
     private boolean noForwards;
@@ -387,6 +390,16 @@ public class ChatEditTypeActivity extends BaseFragment implements NotificationCe
         adminedInfoCell = new ShadowSectionCell(context);
         linearLayout.addView(adminedInfoCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
+        linearLayoutSavingContentContainer = new LinearLayout(context);
+        linearLayoutSavingContentContainer.setBackgroundColor(Theme.getColor(Theme.key_windowBackgroundWhite));
+        linearLayoutSavingContentContainer.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.addView(linearLayoutSavingContentContainer, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+
+        headerCellSavingContent = new HeaderCell(context, 23);
+        headerCellSavingContent.setHeight(46);
+        headerCellSavingContent.setText(LocaleController.getString("SavingContentTitle", R.string.SavingContentTitle));
+        linearLayoutSavingContentContainer.addView(headerCellSavingContent);
+
         savingContentCell = new TextCheckCell(context);
         savingContentCell.setBackgroundDrawable(Theme.getSelectorDrawable(true));
         savingContentCell.setTextAndCheck(LocaleController.getString("RestrictSavingContent", R.string.RestrictSavingContent), noForwards, false);
@@ -394,11 +407,11 @@ public class ChatEditTypeActivity extends BaseFragment implements NotificationCe
             noForwards = !noForwards;
             ((TextCheckCell) v).setChecked(noForwards);
         });
-        linearLayout.addView(savingContentCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+        linearLayoutSavingContentContainer.addView(savingContentCell, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
         savingContentInfoCell = new TextInfoPrivacyCell(context);
         savingContentInfoCell.setBackground(Theme.getThemedDrawable(typeInfoCell.getContext(), R.drawable.greydivider_bottom, Theme.key_windowBackgroundGrayShadow));
-        if (ChatObject.isChannel(currentChat))
+        if (isChannel)
             savingContentInfoCell.setText(LocaleController.getString("SavingContentChannelHelp", R.string.SavingContentChannelHelp));
         else
             savingContentInfoCell.setText(LocaleController.getString("SavingContentGroupHelp", R.string.SavingContentGroupHelp));
@@ -596,7 +609,7 @@ public class ChatEditTypeActivity extends BaseFragment implements NotificationCe
                 typeInfoCell.setBackgroundDrawable(checkTextView.getVisibility() == View.VISIBLE ? null : Theme.getThemedDrawable(typeInfoCell.getContext(), R.drawable.greydivider_bottom, Theme.key_windowBackgroundGrayShadow));
             }
         }
-        savingContentCell.setVisibility(isPrivate ? View.VISIBLE : View.GONE);
+        linearLayoutSavingContentContainer.setVisibility(isPrivate ? View.VISIBLE : View.GONE);
         savingContentInfoCell.setVisibility(isPrivate ? View.VISIBLE : View.GONE);
         radioButtonCell1.setChecked(!isPrivate, true);
         radioButtonCell2.setChecked(isPrivate, true);
@@ -787,6 +800,8 @@ public class ChatEditTypeActivity extends BaseFragment implements NotificationCe
         themeDescriptions.add(new ThemeDescription(typeInfoCell, ThemeDescription.FLAG_CHECKTAG, new Class[]{TextInfoPrivacyCell.class}, new String[]{"textView"}, null, null, null, Theme.key_windowBackgroundWhiteGrayText4));
         themeDescriptions.add(new ThemeDescription(typeInfoCell, ThemeDescription.FLAG_CHECKTAG, new Class[]{TextInfoPrivacyCell.class}, new String[]{"textView"}, null, null, null, Theme.key_windowBackgroundWhiteRedText4));
 
+        themeDescriptions.add(new ThemeDescription(linearLayoutSavingContentContainer, ThemeDescription.FLAG_BACKGROUND, null, null, null, null, Theme.key_windowBackgroundWhite));
+        themeDescriptions.add(new ThemeDescription(headerCellSavingContent, 0, new Class[]{HeaderCell.class}, new String[]{"textView"}, null, null, null, Theme.key_windowBackgroundWhiteBlueHeader));
         themeDescriptions.add(new ThemeDescription(savingContentInfoCell, ThemeDescription.FLAG_BACKGROUNDFILTER, new Class[]{TextInfoPrivacyCell.class}, null, null, null, Theme.key_windowBackgroundGrayShadow));
         themeDescriptions.add(new ThemeDescription(savingContentInfoCell, ThemeDescription.FLAG_CHECKTAG, new Class[]{TextInfoPrivacyCell.class}, new String[]{"textView"}, null, null, null, Theme.key_windowBackgroundWhiteGrayText4));
         themeDescriptions.add(new ThemeDescription(savingContentInfoCell, ThemeDescription.FLAG_CHECKTAG, new Class[]{TextInfoPrivacyCell.class}, new String[]{"textView"}, null, null, null, Theme.key_windowBackgroundWhiteRedText4));

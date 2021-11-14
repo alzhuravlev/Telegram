@@ -4814,4 +4814,8 @@
     <string name="RestrictSavingContent">Restrict Saving Content</string>
     <string name="SavingContentChannelHelp">Participants won\'t be able to forward messages from this channel or save media files.</string>
     <string name="SavingContentGroupHelp">Participants won\'t be able to forward messages from this group or save media files.</string>
+
+    <string name="ForwardsRestrictedForChannel">Forwards from this channel are restricted.</string>
+    <string name="ForwardsRestrictedForGroup">Forwards from this group are restricted.</string>
+
 </resources>

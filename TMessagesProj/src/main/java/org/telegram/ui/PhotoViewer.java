@@ -48,6 +48,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.provider.Settings;
+
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -382,6 +383,8 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
     private boolean doneButtonPressed;
     boolean keyboardAnimationEnabled;
     private Theme.ResourcesProvider resourcesProvider;
+
+    private boolean noForwards;
 
     private Runnable setLoadingRunnable = new Runnable() {
         @Override
@@ -10546,6 +10549,15 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             pageBlocksAdapter.updateSlideshowCell(pageBlock);
         }
         setCurrentCaption(newMessageObject, caption, animateCaption);
+
+        if (noForwards) {
+            shareButton.setVisibility(View.GONE);
+            shareItem.setVisibility(View.GONE);
+            sendItem.setVisibility(View.GONE);
+            menuItem.hideSubItem(gallery_menu_share);
+            menuItem.hideSubItem(gallery_menu_save);
+            menuItem.hideSubItem(gallery_menu_savegif);
+        }
     }
 
     private void showVideoTimeline(boolean show, boolean animated) {
@@ -11971,6 +11983,9 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             return false;
         }
 
+        final TLRPC.Chat chat = messageObject == null ? null : MessagesController.getInstance(UserConfig.selectedAccount).getChat(messageObject.getChatId());
+        noForwards = chat != null && chat.noforwards;
+
         final PlaceProviderObject object = provider.getPlaceForPhoto(messageObject, fileLocation, index, true);
         lastInsets = null;
         WindowManager wm = (WindowManager) parentActivity.getSystemService(Context.WINDOW_SERVICE);
@@ -11992,7 +12007,7 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             } else {
                 windowLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM;
             }
-            if (chatActivity != null && chatActivity.getCurrentEncryptedChat() != null) {
+            if (chatActivity != null && (chatActivity.getCurrentEncryptedChat() != null || noForwards)) {
                 windowLayoutParams.flags |= WindowManager.LayoutParams.FLAG_SECURE;
             } else {
                 windowLayoutParams.flags &=~ WindowManager.LayoutParams.FLAG_SECURE;

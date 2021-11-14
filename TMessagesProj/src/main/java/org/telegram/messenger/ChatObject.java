@@ -1486,6 +1486,10 @@ public class ChatObject {
         return (chat instanceof TLRPC.TL_channel || chat instanceof TLRPC.TL_channelForbidden) && (!chat.megagroup || chat.gigagroup);
     }
 
+    public static boolean isNoForwards(TLRPC.Chat chat) {
+        return chat != null && TextUtils.isEmpty(chat.username) && chat.noforwards;
+    }
+
     public static boolean isMegagroup(TLRPC.Chat chat) {
         return (chat instanceof TLRPC.TL_channel || chat instanceof TLRPC.TL_channelForbidden) && chat.megagroup;
     }

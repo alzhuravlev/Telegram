@@ -148,6 +148,7 @@ import org.telegram.ui.Components.CombinedDrawable;
 import org.telegram.ui.Components.CrossfadeDrawable;
 import org.telegram.ui.Components.CubicBezierInterpolator;
 import org.telegram.ui.Components.FragmentContextView;
+import org.telegram.ui.Components.HintView;
 import org.telegram.ui.Components.IdenticonDrawable;
 import org.telegram.ui.Components.ImageUpdater;
 import org.telegram.ui.Components.LayoutHelper;
@@ -991,6 +992,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                     innerListView.scrollBy(0, dyUnconsumed);
                 }
             }
+            sharedMediaLayout.hideHints();
         }
 
         @Override
@@ -1888,6 +1890,30 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
         }
         ArrayList<Integer> users = chatInfo != null && chatInfo.participants != null && chatInfo.participants.participants.size() > 5 ? sortedUsers : null;
         sharedMediaLayout = new SharedMediaLayout(context, did, sharedMediaPreloader, userInfo != null ? userInfo.common_chats_count : 0, sortedUsers, chatInfo, users != null, this, this, SharedMediaLayout.VIEW_TYPE_PROFILE_ACTIVITY) {
+
+            private HintView noForwardsHint;
+
+            @Override
+            public void hideHints() {
+                super.hideHints();
+                if (noForwardsHint != null)
+                    noForwardsHint.hide();
+            }
+
+            @Override
+            public void showNoForwardsHint(View anchor, boolean isChannel) {
+                if (noForwardsHint == null) {
+                    NestedFrameLayout frameLayout = (NestedFrameLayout) fragmentView;
+                    noForwardsHint = new HintView(getContext(), 4);
+                    if (isChannel)
+                        noForwardsHint.setText(LocaleController.getString("ForwardsRestrictedForChannel", R.string.ForwardsRestrictedForChannel));
+                    else
+                        noForwardsHint.setText(LocaleController.getString("ForwardsRestrictedForGroup", R.string.ForwardsRestrictedForGroup));
+                    frameLayout.addView(noForwardsHint, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP, 10, 0, 10, 0));
+                }
+                noForwardsHint.showForView(anchor, true);
+            }
+
             @Override
             protected void onSelectedTabChanged() {
                 updateSelectedMediaTabText();
@@ -2031,7 +2057,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                         layoutParams.topMargin = actionBarHeight;
                     }
                 }
-                
+
                 int height = MeasureSpec.getSize(heightMeasureSpec);
                 super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
 
@@ -4644,6 +4670,9 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                         }
                     }
                 }
+            }
+            if ((mask & MessagesController.UPDATE_MASK_CHAT) != 0) {
+                sharedMediaLayout.noForwardsChanged();
             }
         } else if (id == NotificationCenter.chatOnlineCountDidLoad) {
             Long chatId = (Long) args[0];

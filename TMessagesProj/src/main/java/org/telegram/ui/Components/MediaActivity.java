@@ -176,7 +176,7 @@ public class MediaActivity extends BaseFragment implements SharedMediaLayout.Sha
 
             @Override
             public TLRPC.Chat getCurrentChat() {
-                return null;
+                return getMessagesController().getChat(-dialogId);
             }
 
             @Override
@@ -199,6 +199,29 @@ public class MediaActivity extends BaseFragment implements SharedMediaLayout.Sha
                 updateMediaCount();
             }
         }, SharedMediaLayout.VIEW_TYPE_MEDIA_ACTIVITY) {
+
+            private HintView noForwardsHint;
+
+            @Override
+            public void hideHints() {
+                super.hideHints();
+                if (noForwardsHint != null)
+                    noForwardsHint.hide();
+            }
+
+            @Override
+            public void showNoForwardsHint(View anchor, boolean isChannel) {
+                if (noForwardsHint == null) {
+                    noForwardsHint = new HintView(fragmentView.getContext(), 4);
+                    if (isChannel)
+                        noForwardsHint.setText(LocaleController.getString("ForwardsRestrictedForChannel", R.string.ForwardsRestrictedForChannel));
+                    else
+                        noForwardsHint.setText(LocaleController.getString("ForwardsRestrictedForGroup", R.string.ForwardsRestrictedForGroup));
+                    fragmentView.addView(noForwardsHint, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.TOP, 10, 0, 10, 0));
+                }
+                noForwardsHint.showForView(anchor, true);
+            }
+
             @Override
             protected void onSelectedTabChanged() {
                 updateMediaCount();
